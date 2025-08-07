@@ -46,6 +46,7 @@ public class MessageController {
             // Преобразуем в JSON
             String message = objectMapper.writeValueAsString(kafkaMessage);
             // Отправляем в Kafka
+            //Thread.sleep(1000); // Типо операция выполняется
             kafkaProducerService.sendMessage(message);
             // kafkaTemplate.send(TOPIC, message);
             return ResponseEntity.ok("200 OK");
