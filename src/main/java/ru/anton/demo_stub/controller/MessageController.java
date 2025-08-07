@@ -3,6 +3,7 @@ package ru.anton.demo_stub.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.kafka.common.errors.DisconnectException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -18,7 +19,7 @@ import ru.anton.demo_stub.template.MessageRequest;
 @RequestMapping
 public class MessageController {
 
-    private static final String TOPIC = "postedmessages";
+    //private static final String TOPIC = "postedmessages";
 
     @Autowired
     //private KafkaTemplate<String, String> kafkaTemplate;
@@ -46,7 +47,7 @@ public class MessageController {
             String message = objectMapper.writeValueAsString(kafkaMessage);
             // Отправляем в Kafka
             kafkaProducerService.sendMessage(message);
-            //kafkaTemplate.send(TOPIC, message);
+            // kafkaTemplate.send(TOPIC, message);
             return ResponseEntity.ok("200 OK");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Internal Server Error");

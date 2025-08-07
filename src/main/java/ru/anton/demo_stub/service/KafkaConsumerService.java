@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Component
 //@Service
-public class KafkaConsumerService { // Consumer читает сообщения по мере поступления
+public class KafkaConsumerService { // Consumer читает сообщения по мере поступления (для проверки)
     private static final String TOPIC = "postedmessages";
 
     @KafkaListener(topics = TOPIC, groupId = "my-group")
@@ -16,4 +16,3 @@ public class KafkaConsumerService { // Consumer читает сообщения 
         System.out.println("Received message: " + message);
     }
 }
-//git@github.com:AntonSesin/Demo_Stub_Kafka.git

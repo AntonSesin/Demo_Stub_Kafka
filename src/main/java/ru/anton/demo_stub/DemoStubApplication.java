@@ -5,12 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.kafka.annotation.EnableKafka;
 
 @SpringBootApplication
-@EnableKafka		// Включаем работу с Кафкой
+@EnableKafka        // Включаем работу с Кафкой
 public class DemoStubApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DemoStubApplication.class, args);
-
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DemoStubApplication.class, args);
+    }
 
 }
