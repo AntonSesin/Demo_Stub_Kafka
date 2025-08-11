@@ -3,6 +3,7 @@ package ru.anton.demo_stub.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import org.apache.kafka.common.errors.DisconnectException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,8 @@ import ru.anton.demo_stub.template.MessageRequest;
 
 @RestController
 @RequestMapping
+@RequiredArgsConstructor // Lombok: инъекция зависимостей через конструктор
 public class MessageController {
-
-    //private static final String TOPIC = "postedmessages";
 
     @Autowired
     //private KafkaTemplate<String, String> kafkaTemplate;
@@ -27,10 +27,6 @@ public class MessageController {
 
     @Autowired
     private ObjectMapper objectMapper;
-
-    public MessageController(KafkaProducerService kafkaProducerService) {
-        this.kafkaProducerService = kafkaProducerService;
-    }
 
     @PostMapping("/post-message")
     public ResponseEntity<String> postMessage(@RequestBody MessageRequest request) {
@@ -46,7 +42,7 @@ public class MessageController {
             // Преобразуем в JSON
             String message = objectMapper.writeValueAsString(kafkaMessage);
             // Отправляем в Kafka
-            //Thread.sleep(1000); // Типо операция выполняется
+
             kafkaProducerService.sendMessage(message);
             // kafkaTemplate.send(TOPIC, message);
             return ResponseEntity.ok("200 OK");
