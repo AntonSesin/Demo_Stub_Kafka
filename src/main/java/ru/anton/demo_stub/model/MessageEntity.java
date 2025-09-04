@@ -14,16 +14,21 @@ public class MessageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;            // Автоинкрементный ID
-    private String msg_id;
-    private long timestamp;
-    private String method;
-    private String uri;
+    @Column(name = "msgUuid")
+    private String msg_uuid;
+    private boolean head;
+    private long timeRq;
 
-    public MessageEntity(String msg_id, long timestamp, String method, String uri) {
+
+    public MessageEntity(String msg_uuid, boolean head, long timeRq) {
         this();
-        this.msg_id = msg_id;
-        this.timestamp = timestamp;
-        this.method = method;
-        this.uri = uri;
+        this.msg_uuid = msg_uuid;
+        this.head = head;
+        this.timeRq = timeRq;
+    }
+
+    @Override
+    public String toString() {
+        return "{ \"msgUuid\": \"" + msg_uuid + "\", \"head\": " + head + ", \"timeRq\": \"" + timeRq + "\" }";
     }
 }
